@@ -15,7 +15,7 @@ class RadniSati extends StatefulWidget {
 
 class _RadniSatiState extends State<RadniSati> {
   DateTimeRange dateRange =
-      DateTimeRange(start: DateTime(2022, 9, 25), end: DateTime(2022, 9, 29));
+      DateTimeRange(start: DateTime.now(), end: DateTime.now());
   @override
   Widget build(BuildContext context) {
     final korisnik = Provider.of<Korisnik?>(context);

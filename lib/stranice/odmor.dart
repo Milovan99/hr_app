@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hr_app/komponente/liste_zahteva_za_odmor.dart';
 import 'package:hr_app/komponente/ucitavanje.dart';
 import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 import '../komponente/korisnik.dart';
 
 class Odmor extends StatefulWidget {
@@ -15,18 +15,28 @@ class Odmor extends StatefulWidget {
 }
 
 class _OdmorState extends State<Odmor> {
+  DateTimeRange dateRange =
+      DateTimeRange(start: DateTime.now(), end: DateTime.now());
+  final TextEditingController datumController = TextEditingController();
+  @override
+  void initState() {
+    datumController.text = '';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final start = dateRange.start;
+    final end = dateRange.end;
     final korisnik = Provider.of<Korisnik?>(context);
     final TextEditingController vrstaOdmoraController = TextEditingController();
-    final TextEditingController duzinaOdmoraController =
-        TextEditingController();
+
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("korisnici")
             .doc(korisnik!.uid)
             .collection("zahtevi za odmor")
-            .orderBy("datum", descending: true)
+            .orderBy("vreme", descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -228,12 +238,15 @@ class _OdmorState extends State<Odmor> {
                                                                     vrstaOdmoraController,
                                                               ),
                                                               TextFormField(
-                                                                decoration:
-                                                                    const InputDecoration(
-                                                                        hintText:
-                                                                            "Duzina odmora"),
+                                                                onTap:
+                                                                    pickDateRange,
+                                                                decoration: const InputDecoration(
+                                                                    icon: Icon(Icons
+                                                                        .calendar_today),
+                                                                    hintText:
+                                                                        "Izaberi datume"),
                                                                 controller:
-                                                                    duzinaOdmoraController,
+                                                                    datumController,
                                                               ),
                                                             ],
                                                           ),
@@ -258,12 +271,8 @@ class _OdmorState extends State<Odmor> {
                                                                   return TextButton(
                                                                       onPressed:
                                                                           (() async {
-                                                                        if (duzinaOdmoraController
-                                                                            .text
-                                                                            .isEmpty) {
-                                                                          if (vrstaOdmoraController
-                                                                              .text
-                                                                              .isEmpty) {}
+                                                                        if (datumController.text.isEmpty &&
+                                                                            vrstaOdmoraController.text.isEmpty) {
                                                                         } else {
                                                                           Navigator.pop(
                                                                               context);
@@ -274,11 +283,13 @@ class _OdmorState extends State<Odmor> {
                                                                               .collection("zahtevi za odmor")
                                                                               .add({
                                                                             "datum":
-                                                                                duzinaOdmoraController.text,
+                                                                                datumController.text,
                                                                             "naziv zahteva":
                                                                                 vrstaOdmoraController.text,
                                                                             "status":
                                                                                 "rezervisano",
+                                                                            "vreme":
+                                                                                DateTime.now()
                                                                           });
                                                                           await FirebaseFirestore
                                                                               .instance
@@ -299,7 +310,7 @@ class _OdmorState extends State<Odmor> {
                                                                             "naslov":
                                                                                 vrstaOdmoraController.text,
                                                                             "sadrzaj":
-                                                                                "rezervisano ${duzinaOdmoraController.text}",
+                                                                                "rezervisano ${datumController.text}",
                                                                             "tip obavestenja":
                                                                                 "odmor",
                                                                             "vreme":
@@ -309,7 +320,7 @@ class _OdmorState extends State<Odmor> {
                                                                           });
                                                                         }
 
-                                                                        duzinaOdmoraController
+                                                                        datumController
                                                                             .clear();
                                                                         vrstaOdmoraController
                                                                             .clear();
@@ -353,5 +364,48 @@ class _OdmorState extends State<Odmor> {
             return const Ucitavanje();
           }
         });
+  }
+
+  Future pickDateRange() async {
+    DateTimeRange? newDateRange = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+      initialDateRange: dateRange,
+      saveText: "Sačuvaj",
+      helpText: "IZABERI NIZ DANA",
+      cancelText: "Izađi",
+      errorFormatText: 'Unesite ispravan datum',
+      errorInvalidText: 'Unestie ispravan niz dana',
+      fieldStartHintText: "Dan/Mjesec/Godina",
+      fieldStartLabelText: "Početni datum",
+      fieldEndHintText: "Dan/Mjesec/Godina",
+      fieldEndLabelText: "Krajnji datum",
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color.fromARGB(255, 155, 193, 188),
+              onPrimary: Color.fromARGB(255, 93, 87, 107),
+              onSurface: Color.fromARGB(255, 155, 193, 188),
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: const Color.fromARGB(
+                    255, 155, 193, 188), // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (newDateRange == null) return;
+
+    setState(() {
+      datumController.text =
+          '${newDateRange.start.year}-${newDateRange.start.month}-${newDateRange.start.day}/${newDateRange.end.year}-${newDateRange.end.month}-${newDateRange.end.day}';
+    });
   }
 }

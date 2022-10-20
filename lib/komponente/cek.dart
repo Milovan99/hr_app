@@ -20,7 +20,6 @@ class Cek extends StatefulWidget {
 }
 
 class _CekState extends State<Cek> {
-  String dropdownvalue = 'Aplikacija demo';
   Color _watchColor = const Color.fromARGB(255, 127, 209, 174);
 
   Icon _check = const Icon(Icons.access_time_filled);

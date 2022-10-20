@@ -48,7 +48,10 @@ class _ListeZahtevaZaOdmorState extends State<ListeZahtevaZaOdmor> {
                   ],
                 ),
                 const SizedBox(height: 5),
-                Text(widget.datum),
+                Text(
+                  widget.datum,
+                  style: TextStyle(fontSize: 15),
+                ),
               ],
             ),
             SizedBox(

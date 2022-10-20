@@ -29,7 +29,7 @@ class _PrijavaState extends State<Prijava> {
               elevation: 0.8,
               backgroundColor: const Color.fromARGB(255, 155, 193, 188),
               title: const Text(
-                "Naziv aplikacije",
+                "Ofis",
                 style: TextStyle(
                     color: Color.fromARGB(255, 93, 87, 107),
                     fontSize: 16,
@@ -44,6 +44,11 @@ class _PrijavaState extends State<Prijava> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      "DOBRO DOŠLI U Ofis",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    SizedBox(height: 20),
                     TextFormField(
                       validator: ((value) =>
                           value!.isEmpty ? "Unesite email" : null),
