@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             fontFamily: "Hubballi",
             textTheme: const TextTheme(
-                bodyText2: TextStyle(
+                bodyMedium: TextStyle(
                     fontSize: 19, color: Color.fromARGB(255, 93, 87, 107)))),
         home: const Omot(),
       ),
