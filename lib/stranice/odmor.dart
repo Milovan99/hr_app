@@ -224,16 +224,17 @@ class _OdmorState extends State<Odmor> {
                                               builder:
                                                   ((context) => AlertDialog(
                                                         title: const Text(
-                                                            "Posalji zahtev za odmor"),
+                                                            "Pošalji zahtev za odmor"),
                                                         content:
                                                             SingleChildScrollView(
                                                           child: Column(
                                                             children: [
                                                               TextFormField(
-                                                                decoration:
-                                                                    const InputDecoration(
-                                                                        hintText:
-                                                                            "Vrsta Odmora"),
+                                                                decoration: const InputDecoration(
+                                                                    icon: Icon(Icons
+                                                                        .edit_note),
+                                                                    hintText:
+                                                                        "Opis zahteva za odmor"),
                                                                 controller:
                                                                     vrstaOdmoraController,
                                                               ),

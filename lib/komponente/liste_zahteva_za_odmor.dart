@@ -55,7 +55,7 @@ class _ListeZahtevaZaOdmorState extends State<ListeZahtevaZaOdmor> {
               ],
             ),
             SizedBox(
-              width: 90,
+              width: 88,
               height: 30,
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class _ListeZahtevaZaOdmorState extends State<ListeZahtevaZaOdmor> {
                     widget.status,
                     style: const TextStyle(
                         color: Color.fromARGB(255, 249, 249, 249),
-                        fontSize: 19,
+                        fontSize: 17,
                         fontFamily: 'Hubballi',
                         fontWeight: FontWeight.bold),
                   ),
