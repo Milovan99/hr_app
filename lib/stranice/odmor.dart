@@ -304,6 +304,8 @@ class _OdmorState extends State<Odmor> {
                                                                                 "odmor",
                                                                             "vreme":
                                                                                 DateTime.now(),
+                                                                            "status":
+                                                                                "neprocitano"
                                                                           });
                                                                         }
 

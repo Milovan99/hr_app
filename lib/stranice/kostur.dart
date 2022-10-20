@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hr_app/komponente/ucitavanje.dart';
 import 'package:hr_app/stranice/Obavestenja.dart';
 import 'package:hr_app/stranice/planiranje_aktivnosti.dart';
@@ -47,21 +48,42 @@ class _KosturState extends State<Kostur> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CircleAvatar(
-                radius: 22,
-                backgroundColor: const Color.fromARGB(255, 248, 248, 248),
-                child: IconButton(
-                  icon: const Icon(Icons.notifications),
-                  color: const Color.fromARGB(255, 93, 87, 107),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Obavestenja()),
-                    );
-                  },
-                ),
-              ),
+              StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("korisnici")
+                      .doc(korisnik!.uid)
+                      .collection("obavestenja")
+                      .orderBy('vreme', descending: true)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var obavestenje = snapshot.data!.docs[0];
+                      var status = obavestenje['status'];
+                      var ikonica = status == 'procitano'
+                          ? Icons.notifications
+                          : Icons.notifications_active_outlined;
+                      return CircleAvatar(
+                        radius: 22,
+                        backgroundColor:
+                            const Color.fromARGB(255, 248, 248, 248),
+                        child: IconButton(
+                          icon: Icon(ikonica),
+                          color: status == 'procitano'
+                              ? const Color.fromARGB(255, 93, 87, 107)
+                              : Colors.red,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Obavestenja()),
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return Ucitavanje();
+                    }
+                  }),
               const Text(
                 "Naziv aplikacije",
                 style: TextStyle(
@@ -70,7 +92,7 @@ class _KosturState extends State<Kostur> {
                     fontFamily: 'IndieFlower'),
               ),
               StreamBuilder<DetaljiKorisnika>(
-                  stream: BazaUsluga(uid: korisnik!.uid).detaljiKorisnika,
+                  stream: BazaUsluga(uid: korisnik.uid).detaljiKorisnika,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       DetaljiKorisnika? detaljiKorisnika = snapshot.data;
