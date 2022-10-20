@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "593323296037",
+    "project_id": "hr-app-f6744",
+    "storage_bucket": "hr-app-f6744.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593323296037:android:776def530cec25c20c06cc",
+        "android_client_info": {
+          "package_name": "com.milovanj.hr_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593323296037-nl178fbqfc8uuactjsv4349abgu2gic2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTy7-ghlT4qi_r0sftvHvvS-IjBsccfCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593323296037-nl178fbqfc8uuactjsv4349abgu2gic2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
