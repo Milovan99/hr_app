@@ -212,6 +212,8 @@ class _ProfilState extends State<Profil> {
                                                       TextFormField(
                                                         decoration:
                                                             const InputDecoration(
+                                                                icon: Icon(Icons
+                                                                    .person),
                                                                 hintText:
                                                                     "Ime"),
                                                         controller:
@@ -220,6 +222,8 @@ class _ProfilState extends State<Profil> {
                                                       TextFormField(
                                                         decoration:
                                                             const InputDecoration(
+                                                                icon: Icon(Icons
+                                                                    .location_on),
                                                                 hintText:
                                                                     "Grad"),
                                                         controller:
@@ -228,6 +232,8 @@ class _ProfilState extends State<Profil> {
                                                       TextFormField(
                                                         decoration:
                                                             const InputDecoration(
+                                                                icon: Icon(Icons
+                                                                    .phone),
                                                                 hintText:
                                                                     "Telefon"),
                                                         controller:
@@ -236,6 +242,8 @@ class _ProfilState extends State<Profil> {
                                                       TextFormField(
                                                         decoration:
                                                             const InputDecoration(
+                                                                icon: Icon(Icons
+                                                                    .groups),
                                                                 hintText:
                                                                     "Tim"),
                                                         controller:
@@ -244,6 +252,8 @@ class _ProfilState extends State<Profil> {
                                                       TextFormField(
                                                         decoration:
                                                             const InputDecoration(
+                                                                icon: Icon(Icons
+                                                                    .date_range),
                                                                 hintText:
                                                                     "Datum zaposlenja"),
                                                         controller:
@@ -252,6 +262,8 @@ class _ProfilState extends State<Profil> {
                                                       TextFormField(
                                                         decoration:
                                                             const InputDecoration(
+                                                                icon: Icon(Icons
+                                                                    .email),
                                                                 hintText:
                                                                     "Email"),
                                                         controller:

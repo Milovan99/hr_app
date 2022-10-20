@@ -4,7 +4,7 @@ import 'package:hr_app/komponente/dogadjaj.dart';
 import 'package:hr_app/komponente/ucitavanje.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-
+import 'package:intl/intl.dart';
 import '../komponente/korisnik.dart';
 
 class Kalendar extends StatefulWidget {
@@ -15,6 +15,7 @@ class Kalendar extends StatefulWidget {
 }
 
 class _KalendarState extends State<Kalendar> {
+  final TextEditingController vremeController = TextEditingController();
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -36,6 +37,12 @@ class _KalendarState extends State<Kalendar> {
 
   List<Dogadjaj> _getDogadjajUDanu(DateTime? date) {
     return selektovaniDogadjaji[date] ?? [];
+  }
+
+  @override
+  void initState() {
+    vremeController.text = ""; //set the initial value of text field
+    super.initState();
   }
 
   @override
@@ -175,14 +182,42 @@ class _KalendarState extends State<Kalendar> {
                             children: [
                               TextFormField(
                                 decoration: const InputDecoration(
+                                    icon: Icon(Icons.edit_note),
                                     hintText: "Naziv dogadjaja"),
                                 controller: _dogadjajController,
                               ),
                               TextFormField(
-                                decoration:
-                                    const InputDecoration(hintText: "Vreme"),
-                                controller: _dogadjajController2,
-                              ),
+                                  decoration: const InputDecoration(
+                                      icon: Icon(Icons.timer),
+                                      hintText: "Sati"),
+                                  controller: vremeController,
+                                  readOnly: true,
+                                  onTap: () async {
+                                    TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                      initialTime: TimeOfDay.now(),
+                                      context: context,
+                                    );
+                                    if (pickedTime != null) {
+                                      //output 10:51 PM
+                                      DateTime parsedTime = DateFormat.jm()
+                                          .parse(pickedTime
+                                              .format(context)
+                                              .toString());
+                                      //converting to DateTime so that we can further format on different pattern.
+                                      //output 1970-01-01 22:53:00.000
+
+                                      String formattedTime =
+                                          DateFormat('Hm').format(parsedTime);
+
+                                      //output 14
+                                      //DateFormat() is from intl package, you can format the time on any pattern you need.
+
+                                      setState(() {
+                                        vremeController.text = formattedTime;
+                                      });
+                                    }
+                                  })
                             ],
                           ),
                         ),
@@ -222,8 +257,7 @@ class _KalendarState extends State<Kalendar> {
                                                 "status": 'neprocitano',
                                                 "naslov":
                                                     _dogadjajController.text,
-                                                "sadrzaj":
-                                                    _dogadjajController2.text,
+                                                "sadrzaj": vremeController.text,
                                                 "tip obavestenja": "dogadjaj",
                                                 "vreme": DateTime.now(),
                                               });
@@ -237,8 +271,7 @@ class _KalendarState extends State<Kalendar> {
                                                 "naziv dogadjaja":
                                                     _dogadjajController.text,
                                                 "datum": _selectedDay,
-                                                "opis":
-                                                    _dogadjajController.text,
+                                                "opis": vremeController.text,
                                               });
                                             }
                                           } else {
@@ -263,7 +296,7 @@ class _KalendarState extends State<Kalendar> {
                                                     _dogadjajController.text,
                                                 "status": "neprocitano",
                                                 "sadrzaj":
-                                                    '${_selectedDay!.year}/${_selectedDay!.month}/${_selectedDay!.day} ${_dogadjajController2.text}',
+                                                    '${_selectedDay!.year}/${_selectedDay!.month}/${_selectedDay!.day} ${vremeController.text}',
                                                 "tip obavestenja": "dogadjaj",
                                                 "vreme": DateTime.now(),
                                               });
@@ -277,15 +310,14 @@ class _KalendarState extends State<Kalendar> {
                                                 "naziv dogadjaja":
                                                     _dogadjajController.text,
                                                 "datum": _selectedDay,
-                                                "opis":
-                                                    _dogadjajController.text,
+                                                "opis": vremeController.text,
                                               });
                                             }
                                           }
                                         }
 
-                                        _dogadjajController.clear();
-                                        _dogadjajController2.clear();
+                                        _dogadjajController.clear;
+                                        vremeController.clear;
                                         setState(() {});
                                         return;
                                       },

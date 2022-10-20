@@ -150,8 +150,8 @@ class _PlaniranjeAkrivnostiState extends State<PlaniranjeAkrivnosti> {
                       child: Column(
                         children: [
                           TextFormField(
-                            decoration:
-                                const InputDecoration(hintText: "Naziv"),
+                            decoration: const InputDecoration(
+                                icon: Icon(Icons.edit_note), hintText: "Naziv"),
                             controller: nazivController,
                           ),
                           TextFormField(
@@ -218,8 +218,9 @@ class _PlaniranjeAkrivnostiState extends State<PlaniranjeAkrivnosti> {
                                 }
                               }),
                           TextFormField(
-                            decoration:
-                                const InputDecoration(hintText: "Duzina"),
+                            decoration: const InputDecoration(
+                                icon: Icon(Icons.timelapse),
+                                hintText: "Duzina"),
                             controller: duzinaController,
                           ),
                         ],
