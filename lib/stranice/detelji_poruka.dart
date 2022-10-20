@@ -120,7 +120,8 @@ class _DetaljiPorukaState extends State<DetaljiPoruka> {
                     "naslov": widget.posiljalacId,
                     "sadrzaj": poruke,
                     "tip obavestenja": "poruka",
-                    "vreme": DateTime.now()
+                    "vreme": DateTime.now(),
+                    "status": "neprocitano"
                   });
                 },
                 backgroundColor: Colors.blue,

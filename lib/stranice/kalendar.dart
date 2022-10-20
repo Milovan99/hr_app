@@ -163,120 +163,139 @@ class _KalendarState extends State<Kalendar> {
             }),
       ),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: (() => showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                    title: const Text("Dodaj dogadjaj"),
-                    content: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            decoration: const InputDecoration(
-                                hintText: "Naziv dogadjaja"),
-                            controller: _dogadjajController,
+          onPressed: (() => _selectedDay == null
+              ? ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text("Selektujte dan")))
+              : showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: const Text("Dodaj dogadjaj"),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                    hintText: "Naziv dogadjaja"),
+                                controller: _dogadjajController,
+                              ),
+                              TextFormField(
+                                decoration:
+                                    const InputDecoration(hintText: "Vreme"),
+                                controller: _dogadjajController2,
+                              ),
+                            ],
                           ),
-                          TextFormField(
-                            decoration:
-                                const InputDecoration(hintText: "Vreme"),
-                            controller: _dogadjajController2,
-                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text("Otkazi")),
+                          StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection("korisnici")
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return TextButton(
+                                      onPressed: () async {
+                                        if (_dogadjajController.text.isEmpty) {
+                                        } else {
+                                          if (selektovaniDogadjaji[
+                                                  _selectedDay] !=
+                                              null) {
+                                            Navigator.pop(context);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        'Cuvanje podataka ...')));
+                                            for (var index = 0;
+                                                index <
+                                                    snapshot.data!.docs.length;
+                                                index++) {
+                                              var indeks =
+                                                  snapshot.data!.docs[index].id;
+                                              await FirebaseFirestore.instance
+                                                  .collection("korisnici")
+                                                  .doc(indeks)
+                                                  .collection("obavestenja")
+                                                  .add({
+                                                "status": 'neprocitano',
+                                                "naslov":
+                                                    _dogadjajController.text,
+                                                "sadrzaj":
+                                                    _dogadjajController2.text,
+                                                "tip obavestenja": "dogadjaj",
+                                                "vreme": DateTime.now(),
+                                              });
+                                              await FirebaseFirestore.instance
+                                                  .collection("korisnici")
+                                                  .doc(indeks)
+                                                  .collection("dogadjaji")
+                                                  .add({
+                                                "dan": _selectedDay!.day
+                                                    .toString(),
+                                                "naziv dogadjaja":
+                                                    _dogadjajController.text,
+                                                "datum": _selectedDay,
+                                                "opis":
+                                                    _dogadjajController.text,
+                                              });
+                                            }
+                                          } else {
+                                            Navigator.pop(context);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        'Cuvanje podataka ...')));
+                                            for (var index = 0;
+                                                index <
+                                                    snapshot.data!.docs.length;
+                                                index++) {
+                                              var indeks =
+                                                  snapshot.data!.docs[index].id;
+
+                                              await FirebaseFirestore.instance
+                                                  .collection("korisnici")
+                                                  .doc(indeks)
+                                                  .collection("obavestenja")
+                                                  .add({
+                                                "naslov":
+                                                    _dogadjajController.text,
+                                                "status": "neprocitano",
+                                                "sadrzaj":
+                                                    '${_selectedDay!.year}/${_selectedDay!.month}/${_selectedDay!.day} ${_dogadjajController2.text}',
+                                                "tip obavestenja": "dogadjaj",
+                                                "vreme": DateTime.now(),
+                                              });
+                                              await FirebaseFirestore.instance
+                                                  .collection("korisnici")
+                                                  .doc(indeks)
+                                                  .collection("dogadjaji")
+                                                  .add({
+                                                "dan": _selectedDay!.day
+                                                    .toString(),
+                                                "naziv dogadjaja":
+                                                    _dogadjajController.text,
+                                                "datum": _selectedDay,
+                                                "opis":
+                                                    _dogadjajController.text,
+                                              });
+                                            }
+                                          }
+                                        }
+
+                                        _dogadjajController.clear();
+                                        _dogadjajController2.clear();
+                                        setState(() {});
+                                        return;
+                                      },
+                                      child: const Text("Dodaj"));
+                                } else {
+                                  return const Ucitavanje();
+                                }
+                              }),
                         ],
-                      ),
-                    ),
-                    actions: [
-                      TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text("Otkazi")),
-                      StreamBuilder(
-                          stream: FirebaseFirestore.instance
-                              .collection("korisnici")
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return TextButton(
-                                  onPressed: () async {
-                                    if (_dogadjajController.text.isEmpty) {
-                                    } else {
-                                      if (selektovaniDogadjaji[_selectedDay] !=
-                                          null) {
-                                        for (var index = 0;
-                                            index < snapshot.data!.docs.length;
-                                            index++) {
-                                          var indeks =
-                                              snapshot.data!.docs[index].id;
-                                          await FirebaseFirestore.instance
-                                              .collection("korisnici")
-                                              .doc(indeks)
-                                              .collection("obavestenja")
-                                              .add({
-                                            "naslov": _dogadjajController.text,
-                                            "sadrzaj":
-                                                _dogadjajController2.text,
-                                            "tip obavestenja": "dogadjaj",
-                                            "vreme": DateTime.now(),
-                                          });
-                                          await FirebaseFirestore.instance
-                                              .collection("korisnici")
-                                              .doc(indeks)
-                                              .collection("dogadjaji")
-                                              .add({
-                                            "dan": _selectedDay!.day.toString(),
-                                            "naziv dogadjaja":
-                                                _dogadjajController.text,
-                                            "datum": _selectedDay,
-                                            "opis": _dogadjajController.text,
-                                          });
-                                        }
-                                      } else {
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    'Cuvanje podataka ...')));
-                                        for (var index = 0;
-                                            index < snapshot.data!.docs.length;
-                                            index++) {
-                                          var indeks =
-                                              snapshot.data!.docs[index].id;
-
-                                          await FirebaseFirestore.instance
-                                              .collection("korisnici")
-                                              .doc(indeks)
-                                              .collection("obavestenja")
-                                              .add({
-                                            "naslov": _dogadjajController.text,
-                                            "sadrzaj":
-                                                '${_selectedDay!.year}/${_selectedDay!.month}/${_selectedDay!.day} ${_dogadjajController2.text}',
-                                            "tip obavestenja": "dogadjaj",
-                                            "vreme": DateTime.now(),
-                                          });
-                                          await FirebaseFirestore.instance
-                                              .collection("korisnici")
-                                              .doc(indeks)
-                                              .collection("dogadjaji")
-                                              .add({
-                                            "dan": _selectedDay!.day.toString(),
-                                            "naziv dogadjaja":
-                                                _dogadjajController.text,
-                                            "datum": _selectedDay,
-                                            "opis": _dogadjajController.text,
-                                          });
-                                        }
-                                      }
-                                    }
-
-                                    _dogadjajController.clear();
-                                    _dogadjajController2.clear();
-                                    setState(() {});
-                                    return;
-                                  },
-                                  child: const Text("Dodaj"));
-                            } else {
-                              return const Ucitavanje();
-                            }
-                          }),
-                    ],
-                  ))),
+                      ))),
           label: const Text("Dodaj dogadjaj"),
           icon: const Icon(Icons.add)),
     );

@@ -44,6 +44,9 @@ class _ObavestenjaState extends State<Obavestenja> {
                 child: Text("Nema obavestenja"),
               );
             }
+            var obavestenja = snapshot.data!.docs;
+            var obavestenje = obavestenja[0];
+            _promeniStatus(obavestenje, korisnik.uid);
             return Scaffold(
                 backgroundColor: const Color.fromARGB(255, 230, 235, 224),
                 appBar: AppBar(
@@ -145,5 +148,16 @@ class _ObavestenjaState extends State<Obavestenja> {
             return const Ucitavanje();
           }
         });
+  }
+
+  Future<void> _promeniStatus(
+      QueryDocumentSnapshot<Map<String, dynamic>> obavestenje,
+      String uid) async {
+    await FirebaseFirestore.instance
+        .collection("korisnici")
+        .doc(uid)
+        .collection('obavestenja')
+        .doc(obavestenje.id)
+        .update({'status': 'procitano'});
   }
 }
