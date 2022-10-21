@@ -54,37 +54,83 @@ class _DokumentiState extends State<Dokumenti> {
           ),
         ),
       ),
-      body: FutureBuilder<ListResult>(
-          future: futureFiles,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final files = snapshot.data!.items;
+      body: Column(
+        children: [
+          const SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Center(
+                child: Text(
+                  "Dokumenti",
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Container(
+            height: 300,
+            child: FutureBuilder<ListResult>(
+                future: futureFiles,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final files = snapshot.data!.items;
 
-              return ListView.builder(
-                itemCount: files.length,
-                itemBuilder: (context, index) {
-                  final file = files[index];
+                    return ListView.builder(
+                      itemCount: files.length,
+                      itemBuilder: (context, index) {
+                        final file = files[index];
 
-                  return ListTile(
-                    title: Text(file.name),
-                    trailing: IconButton(
-                      icon: const Icon(
-                        Icons.open_in_new,
-                        color: Colors.black,
-                      ),
-                      onPressed: () => downloadFile(file),
-                    ),
-                  );
-                },
-              );
-            } else if (snapshot.hasError) {
-              return const Center(
-                child: Text("Greska"),
-              );
-            } else {
-              return const Ucitavanje();
-            }
-          }),
+                        return Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 15),
+                              child: Container(
+                                height: 70,
+                                decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 249, 249, 249),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(7),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: ListTile(
+                                    leading: Image.asset(
+                                      'lib/assets/Ikonice/pdf.png',
+                                      width: 30,
+                                      height: 30,
+                                    ),
+                                    title: Text(file.name),
+                                    trailing: IconButton(
+                                      icon: const Icon(
+                                        Icons.open_in_new,
+                                        color: const Color.fromARGB(
+                                            255, 93, 87, 107),
+                                      ),
+                                      onPressed: () => downloadFile(file),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return const Center(
+                      child: Text("Greska"),
+                    );
+                  } else {
+                    return const Ucitavanje();
+                  }
+                }),
+          ),
+        ],
+      ),
     );
   }
 

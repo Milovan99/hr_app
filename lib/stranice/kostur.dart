@@ -85,7 +85,7 @@ class _KosturState extends State<Kostur> {
                     }
                   }),
               const Text(
-                "Naziv aplikacije",
+                "Ofis",
                 style: TextStyle(
                     color: Color.fromARGB(255, 93, 87, 107),
                     fontSize: 16,
