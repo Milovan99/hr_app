@@ -64,7 +64,79 @@ Ispod dana prikazan je raspored aktivnosti. Aktivnosti se učitavaju iz baze pod
 
 Na slici Screenshot aplikacije 11 – Poruka ekran, se nalazi ekran na kome su prikazane poruke između dva korisnika. App bar se sastoji od dugmeta koji će odvesti korisnika nazad na prethodni ekran, slike korisnika sa kojim se vodi kominikacija i njegovo ime i prezime. Ispod app bara biće prikazane sve poruke koje su korisnici razmenili. Na desnoj strani se nalaze poruke koje šalje korisnik koji je trenutno ulogovan i koji koristi aplikaciju, a na levoj stani se nalaze poruke korisnika sa kojim se vodi komunikacija. Ispod poruka nalazi se polje za unos nove poruke.
 
+## Dokumentacija koda
 
+<img src="https://user-images.githubusercontent.com/29107405/216132611-6bbf0ee2-1a86-4046-9e77-af483c5ebac4.PNG">
+
+Prva funkcija koja se izvršava pri pokretanju aplikacije je main() funkcija. Iz prikazanog koda se vidi da je asinhronog tipa što znači da će biti potrebno određeno vreme da se dobije rezultat .
+
+Flutter framework koristi widgetbinding da bi bio u mogućnosti da komunicira sa flutter engine-om. Kada je pozvana funkcija ensureInitialized() to je kreiralo instancu WidgetsFlutterBinding  i pošto Firebase.initalizeApp() treba da koristi kanale platforme da bi pozvao native treba se inicijalizirati vezivanje.
+
+Zatim se pojavljuje funkcija runApp() koja će pokrenuti widget koji joj je prosleđen u argumentu i prikazaće ga preko celog ekrana. Widget koji će biti prikazan je MyApp(); proširuje StatelesWidget koji nema promenjiva stanja. Widget build(BuildContext context) opisuje deo korisničkog interfejsa i framework poziva ovu metodu kada je widget ubačen u tree u datom BuildContext i kada se ovisnosti ovog widgeta promene.
+
+StramProvider sluša vrednost toka podataka Korisnik i vraća je. Vredost koja će biti prosleđena svim widget-ima je AuthUsluga().korsinik . U klasi AuthUsluga()  , korisnik  koristi funkciju authStateChanges() koja obaveštava o promena informacija o prijavljenom korisniku i zatim se na osnovu tih informacija vraća ili null vrednost ili korisnikov id. MaterialApp je widget koji obuhvata brojne widgete koji su obično potrebni za aplikacije materijalnog dizajna. DebugShowCheckedModeBanner: false  , uklanja baner koji naznačava da je aplikacija još u procesu izrade. Theme definiše vizualne vrednosti kao što su boja, fontovi i oblici. Korišćen je ThemeData za konfiguraciju Theme-e u kom je podešen font Hubballi, veličina fonta je 19 i boja je približna sivoj. Konfigurisan je widget Omot() kao početna ruta aplikacije. 
+
+<img src="https://user-images.githubusercontent.com/29107405/216133106-333b478a-d360-47bc-84d1-a62af1e520a0.PNG">
+
+Kada se aplikacija pokrene widget Omot odlučuje na osnovu toga da li je korisnik prijavljen ili ne, da li će vratiti Log in ekran(Prijava widet) ili Pocetni ekrana (Kostur widget) aplikacije. Pomoću Provider-a koji šalje vrednost statusa korisnika svim widget-ima može se proveriti da li je korisnik prijavljen ili ne.
+
+<img src="https://user-images.githubusercontent.com/29107405/216133268-470faada-fb7d-4140-b8b6-615ac3844843.PNG">
+<img src="https://user-images.githubusercontent.com/29107405/216133373-30ef456b-99e2-4ab7-9cdc-b8c34e7d0065.PNG">
+<img src="https://user-images.githubusercontent.com/29107405/216133387-4db7bebf-1947-47e8-b278-6ae71d47b617.PNG">
+
+Widget Prijava proširuje StatefulWidget što znači da može imati promenjiva stanja. Kreirana je instanca klase AuthUsluga() pod nazivom _auth, ucitavanje je bool tip što znači da može imati vrednosti true ili false ; u ovom slučaju je dodeljena vrednost false, string parametar ima vrednosti UTF-16 i taj tip je dodeljen email-u, password-u, error-u i na kraju _formKljuc ima vrednost ključa forme koja će biti napravljena za prijavu korisnika. Ako ucitavanje ima vrednost true biće prikazan widget Ucitavanje koji vraća SpinKit koji je napravljen kao animacija za učitavanje, a ako ucitavanje ima vrednost false biće vraćen Scaffold. Scaffold je widget koji će obično biti prikazan preko čitavog ekrana i implementira obični vizualni layout sturkture  materijalnog dizajna.
+
+<img src="https://user-images.githubusercontent.com/29107405/216133779-c823d3b0-76f7-4993-a013-d9965ac45a3e.PNG">
+
+Boja pozadine Scaffold-a u ovom slučaju je definisana kao boja slična sivoj. AppBar se nalazi na vrhu ekrana i parametri koji su definisani u njemu su elevation koji kontroliše veličinu senke koja se nalazi ispod app bara, boja bara je slična plavoj, title je komponenta koja se obično nalazi na srediti bara i tipično je definisan kao Text widget koji opisuje trenutni sadržaj aplikacije. Body Scaffold-a je primarni sadržaj koji je prikazan ispod app bara, iznad donjeg dela i iza floatingActionButton-a. U njemu se u ovom primeru nalazi Padding widget koji umeće svoj child element. EdgeInsets.symmetric(horizontal: 25) kreira umetanje elementa koji će biti odvojeni sa leve i desne strane od elementa koji ga okružuje za 25 piksela.
+
+Element koji Padding umeće je widget Form koji kreira kontener za polja obrasca. Polja su organizovana pomoću widgeta Column koji kreira vertikalni niz elemenata. Parametar mainAxisAlignment: MainAxisAlignment.center osigurava da elementi u widgetu Column budu pozicionirani u sredini. Elementi forme za prijavu korisnika su Text widget sa dobrodošlicom, SizedBox koji omogućava u ovom slučaju odvajanje elemenata onoliko piksela koliko je prosleđeno u argumentu, dva widget-a TextFormField() i FloatingActionButton(). TextFormField() sadrži validatora koji proverava da li je uneta vrednost u polja i ako je vredost null onda će biti ispisane adekvatne poruke. TextFormField() sadrže i onChanged parametar koji će kada se tekst unese u polje pomoću setState() obavestiti framework da je došlo do promene objekta i dodeliće unete vrednosti. Parametar enableSuggestions: false onemogućuje sugestije pri kucanju. Parametar decoration opisuje kako će izgledati samo polje koje u ovom slučaju ima hintText koji objašnjava šta bi trebalo biti uneto u to polje i ikonicu. Boja je postavljena pomoću fillColor i efekat zaokruženja je postignut pomoću borderRadius-a. FloatingActionButton.extended() kreira dugme sa ikonicom i tekstom koje kada se klikne prvo postavlja parametar ucitavanje da bude true što će pokrenuti animaciju, zatim se proverava autentičnost podataka koji su uneti sa podacima iz baze, ako nema podudaranja učitavanje će biti false i animacija će prestati i poruka će biti ispisana o neuspešnom prijavljivanju .Ako su podaci autentični widget Omot će dobiti informaciju o podacima korisnika koji je prijavljen i biće prikazan widget Kostur.
+
+
+<img src="https://user-images.githubusercontent.com/29107405/216133971-dc83635f-afd4-41f5-aeea-6b8ad0e0b8dd.PNG">
+<img src="https://user-images.githubusercontent.com/29107405/216133992-9d2e8548-8d38-4207-84d1-7b0c24cc0314.PNG">
+
+Ako Provider pošalje podatke widgetu Omot o korisniku prikazaće se widget Kostur. Lista je kolekcija objekata koja ima svoju dužinu i indekse. Lista koja je kreirana je _widgetOptions koja sadrži widgete. Lista _widgetOptions biće kasnije od pomoći kad se bude trebalo odlučiti koji od widget-a će biti prikazan u body-ju Scaffold-a.
+Zatim je definisana funkcija _onItemTapped koja će postaviti selektovan indeks za onaj koji joj je prosleđen u argumentu kada bude pozvana. Widget Kostur vraća widget Scaffold. Ovaj put u AppBaru parametar automaticallyImplyLeading ima vrednost false, on kontroliše da li se treba pokušati implicirati vodeći widget ako je null. Parametar flexibleSpace omogućava da se ubaci niz elemenata u app bar. Da bi bili horizontalno poredani elementi korišćen je widget Row i mainAxisAlignment: MainAxisAlignment.spaceEvenly da bi se ravnomerno rasporedili elementi u tom redu. Prvo dugme u redu je dugme za obaveštenja koje u zavisnosti da li je poslednje obaveštenje pročitano menja svoj status.
+
+<img src="https://user-images.githubusercontent.com/29107405/216134257-d5fd124f-b846-462c-aa62-135d95f6fa7f.PNG">
+<img src="https://user-images.githubusercontent.com/29107405/216134272-6be07bf1-1f27-4a67-9bd6-c525ca0410bc.PNG">
+
+Da bi se izvršio pristup bazi podataka i da bi se dobili podaci u realnom vremenu korišćen je StreamBuilder. Tok podataka StreamBuildera je dobijen kreiranjem instance baze gde je ruta bila kolekcija „korisnici“ koja je skup dokumenata, zatim dokument trenutno ulogovalnog korisnika što se dobije pomoću Provider-a kolekcija „obaveštenja“ i ti podaci trebaju biti prikazani po vremenu kada su kreirani. Ako snapshot ima podatke mapiraće se prvi dokument u obavestenje. Status dobijamo tako sto se pristupi mapi podataka i traži se podatak sa ključem“status“. U zavistnosti kakav je status, ikonica će imati određenu vrednost. Da bi ikonica bila kreirana koristi se CircleAvatar widget koji u ovom slučaju omogućava da se kreira krug sa ikonicom. Ikonica je ubačena pomoću widgeta Icon. Parametar onPresed omogućava da ako se klikne na ikonicu pomoću Navigator.push() funkcije kreira widget Obavestenja() preko widgeta kostur .
+
+<img src="https://user-images.githubusercontent.com/29107405/216134501-b3b57854-39f5-462c-8db4-a25236a5cb4b.PNG">
+
+Za poslednje dugme koje treba da pri klikom na njega otvori ekran profil korisnika, koristi se takođe StramBuilder sa razlikom da je tok podatak definisan sa već definisanom rutom do željenog dokumenta. Podaci tog dokumenta se šalju u argumentima widgeta Profil() koji će se kreirati preko Kostur widgeta funkcijom Navigator.push() kada se klikne na CircleAvatar što se prati sa GestureDetector-om. Umesto ikonice ovaj put u CircleAvatar-u koristi se Image.asset() za prikaz slike. Da bi mogla biti korišćena slika, u fajlu pubspec.yaml mora da se definiše ruta slike. Novina u ovom Scaffold widget-u je što je iskorišten bottomNavigationBar koji se koristi za definisanje navigacionog menija u dnu Scaffolda. Svaki item ima definisanu aktivnu ikonicu, neaktivnu ikonicu, naslov i boju. Prilikom klika na neki od elemenata što je definisano u parametru onTap poziva se funkcija koja će promeniti selektovani indeks i samim tim promeniće se i body Scaffolda .
+
+
+<img src="https://user-images.githubusercontent.com/29107405/216134670-b71fa1b6-a95d-4ec2-a6d1-65fb5db4ccc8.PNG">
+<img src="https://user-images.githubusercontent.com/29107405/216134709-c6d7cc55-cd86-489f-a16a-6ea9ab2155e0.PNG">
+<img src="https://user-images.githubusercontent.com/29107405/216134736-4ad4df41-b08c-4721-a27f-8b48189df7f6.PNG">
+
+Widget Obaveštenja je zadužen za pristup bazi podataka pomoću StramBuilder-a i prikaz svih obaveštenja u određenom formatu. Da bi se kartice svih obaveštenja mogle napraviti koristi se ListView.builder koji kreira niz objekata sa zadatim instrukcijama. Parametar itemCount označava koliko elemenata će biti u listi, u ovom slučaju taj broj se dobija pomoću snapshot.data!.docs.length koji će vratiti broj dokumenata. U parametru itemBuilder je definisan sadržaj same liste i svi podaci iz snapshot-a se šalju widgetu ListaObavestenja pomoću argumenata. Widget ListaObavestenja je zadužen za kreiranje samo jedne kartice obaveštenja. U widgetu Obavestenja se nalazi funkcija _promeniStatus koja prima dva argumenta: dokument i id korisnika. Na osnovu tih informacija kada se funkcija pozove ona će pristupiti bazi podataka i promeniće status poslednjeg obaveštenja u pročitano što će omogućiti da se dugme u widget- u vrati u normalno stanje.
+
+<img src="https://user-images.githubusercontent.com/29107405/216134969-e6f4d0c3-ae62-4fe2-948f-b539b9188450.PNG">
+<img src="https://user-images.githubusercontent.com/29107405/216135222-2b52e7d4-e939-4fc9-b0b4-a28dae397043.png">
+
+Widget RadniSati zadužen je za prikaz podataka iz baze podataka vezane za aktivnosti korisnika u različitim danima. Da bi se izabrao dan ili niz dana koje korisnik želi da pregleda korišćena je funkcija showDataRangePicker() koja pri svom pozivu kreira full screen meni datuma sa materijalnim dizajnom. Parametri firstDate i lastDate označavaju početnu i poslednju godinu kalendara koja će se prikazati. Parametar initialDateRange označava datume koje će prvobitno biti selektovani pri pokretanju kalendara. Ostatak parametra koji su korišćeni su tekstualni delovi kaledara koji su konfigurisani zbog prevoda. Sama funkcija pickDateRange() će, ako su željeni podaci uneti, promeniti vrednost datuma koji će biti ispisan u widgetu RadniSati.
+
+<img src="https://user-images.githubusercontent.com/29107405/216135380-6246a125-f854-4e48-b655-6e8433a5fa81.png">
+
+Widget PlaniranjeAkrivnosti prikazuje listu aktivnosti i omogućava korisniku da napravi vremenski raspored zadataka koje želi da izvrši. Da bi se uneo datum za koji se želi napraviti aktivnost koristi se funkcija showDatePicker() koja pri svom pozivu kreira meni datuma sa materijalnim dizajnom. Za razliku od showDataRangePicker() , showDatePicker() omogućava biranje samo jednog datuma. Parametri fisrtDate i lastDate su konfigurisani da omoguće selektovanje samo tri dana sa početnim danom koji će imati vrednost datuma koji je u tom trenutku, što je dizajnirano zbog toga što korisnik u svom prikazu rasporeda vidi samo ta tri datuma
+
+Widget Dokumenti zadužen je za pristup Firebase-vom Storage-u i prikaz tih podataka u vidu liste. Da bi se dobila lista tih dokumenta izvršeno je kreiranje instance sa vrednostima Firebase skladišta formatiranim u listi. Funkcija initState() će se pozvati kada je objekat ubačen u tree i framework će je pozvati samo jednom za svako stanje objekta. Da bi se otvorio dokument potrebno je imati njegov url iz skladišta što omogućava funkcija getDownloadURL(). Pri pozivu funkcije dowloadFile() ona na osnovu argumenta koji joj je prosleđen može dobiti url željenog dokumenta i tu informaciju proslediti widget-u PdfCitac .
+
+<img src="https://user-images.githubusercontent.com/29107405/216135585-392bad0d-7c88-46e3-8bdb-b25016a2f65f.png">
+
+Widget PdfCitac zadužen je za preuzimanje dokumenta uz pomoć url-a i prikaz tog dokumenta. To mu omogućuje PDF().cachedFromUrl(). Parametar maxAgeCacheObject će odrediti koliko dana će se dokument čuvati u keš memoriji, parametar placeholder će prikazati procentualno koliko je dokument učitan i parametar errorWidget će ispitati grešku ako dođe do nje.
+
+<img src="https://user-images.githubusercontent.com/29107405/216135720-2df85113-9366-44ff-8c79-2cc5f1e1b010.png">
+
+Widget Odmor je zadužen za prikaz stanja poslatih zahteva za odmor, informacije o stanju i omogućava da se pošalje novi zahtev. Kada se želi poslati novi zahtev otvoriće se AlterDialog koji kreira novi prostor za unos podataka. Parametar content definisan je da sadrži TextFormField widget-e koji su prostor za unos teksta. Parametar controller kontroliše promene u tekstu koji se unosi u polje.
+
+<img src="https://user-images.githubusercontent.com/29107405/216135840-ea7f67c9-4237-4d29-b099-4d284dff8ae3.png">
+
+Widgdet Poruke zadužen je za prikaz poruka iz baze podataka. Da bi se korisniku omogućio lakši pronalazak poruke sa drugim korisnikom, postavljen je upit pri prikazivanju svih poruka iz baze. Pri kreiranju liste svih poruka postavlja se uslov pomoću funkcije contains() koja će ispitati da li parametar ime u dokumentu sadži prosleđenu vrednost. Vrednost koja se prosleđuje se dobija iz widgeta TextField() koji sluša promene i na svaku izmenu će obavestiti framework da je došlo do promene vrednosti koja se prosleđuje. Funkcija contains() omogućava dinamični prikaz liste i omogućuje funkcionalnost pretraživanja.
 
 
 
