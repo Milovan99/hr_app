@@ -44,7 +44,7 @@ Na slici Screenshot aplikacije 7 - Kalendar ekran, se nalazi ekran koji prikazuj
 
 Kada korisnik unese novi događaj on će biti dodat svim ostalim kalendarima drugih korisnika i svako će dobiti obaveštenje o novom događaju.
 
-<img src="https://user-images.githubusercontent.com/29107405/216129601-1f668c23-798a-414e-bb99-efe6bb4b3192.png" width="200" height="350"><img src="https://user-images.githubusercontent.com/29107405/216129651-32f59271-d841-4414-986a-f6675c7c0f69.png" width="200" height="350"><img src="https://user-images.githubusercontent.com/29107405/216129671-a66e9fdb-b8fa-4150-95b4-a8bb2c465f27.png" width="200" height="350">
+<img src="https://user-images.githubusercontent.com/29107405/216129601-1f668c23-798a-414e-bb99-efe6bb4b3192.png" width="200" height="350">      <img src="https://user-images.githubusercontent.com/29107405/216129651-32f59271-d841-4414-986a-f6675c7c0f69.png" width="200" height="350">      <img src="https://user-images.githubusercontent.com/29107405/216129671-a66e9fdb-b8fa-4150-95b4-a8bb2c465f27.png" width="200" height="350">
 
 Ispod app bara se nalazi kalendar koji može biti prikazan na tri načina: prikaz čitavog meseca (svih dana u mesecu), prikaz dve sedmice i prikaz jedne sedmice. Pomoću strelica korisnik može da pređe na sledeći mesec ili da ode na prethodni. Na svakom danu će se nalaziti mali kružić koji označava da postoje događaji u tom danu. Prilikom klika na određeni dan pojaviće se plavi krug oko tog datuma i ispod kaledara biće prikazana lista svih događaja u tom danu. Svetlo plavom bojom će biti selektovan dan koji je u tom momentu kad je aplikacija pokrenuta.
 
@@ -56,7 +56,7 @@ Klikom na nekog od korisnika otvoriće se ekran Profil i ispisaće se svi podaci
 
 Na slici Screenshot aplikacije 9 – Poruke, se nalazi sadržaj poruka koje je korisnik razmenio sa drugim korisnicima. Podaci o porukama se iščitavaju i ispisuje se ime i prezime korisnika, slika korisnika i poslednja poruka. U Search baru korisnik može da traži korisnika preko njegovog imena radi lakšeg pronalaska. Klikom na određenu poruku otvoriće se ekran Poruka na kojem će se ispisati sadržaj svih poruka između ta dva korisnika.
 
-<img src="https://user-images.githubusercontent.com/29107405/216129971-88855162-4612-4c29-8485-96aaf0e542e8.png" width="200" height="350"><img src="https://user-images.githubusercontent.com/29107405/216130008-57a4c247-42dd-44df-a0c0-87f32833391c.png" width="200" height="350">
+<img src="https://user-images.githubusercontent.com/29107405/216129971-88855162-4612-4c29-8485-96aaf0e542e8.png" width="200" height="350">      <img src="https://user-images.githubusercontent.com/29107405/216130008-57a4c247-42dd-44df-a0c0-87f32833391c.png" width="200" height="350">
 
 Na slici Screenshot aplikacije 10 – Aktivnosti, prikazan je sadržaj aktivnosti koji omogućava korisniku da isplanira svoj dan. Ispod app bara prikazana su tri dana sa početnim danom kada je aplikacija pokrenuta i zatim dva sledeća dana.
 
