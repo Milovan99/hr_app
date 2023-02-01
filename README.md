@@ -6,7 +6,9 @@ Flutter project.
 
 Naziv aplikacije je „Ofis“ i reč je o aplikaciji koja omogućava efikasnije upravljanje resursima i jednostavniju komunikaciju između korisnika. Cilj aplikacije je da omogući praćenje vremena provedenog radeći određenu aktivnost, lak kalendarski prikaz bitnih događaja korisnicima, olakšavanje procesa slanja zahteva za odmor, pregled radnih sati u određenom vremenskom intervalu, pregled bitnih dokumenata u samoj aplikaciji, pregled informacija o drugim korisnicima i komunikaciju sa njima i planiranje dnevnih aktivnosti pomoću rasporeda zadataka.
 
-<img src="https://user-images.githubusercontent.com/29107405/216125021-7b195391-25ca-44cb-b6b1-85efd7e13b7e.png" width="200" height="300"> <img src="https://user-images.githubusercontent.com/29107405/216125818-2a74d8be-48bc-4c02-b35a-c6bf755dd6e4.png" width="200" height="300"> <img src="https://user-images.githubusercontent.com/29107405/216126015-ef14d060-4d59-4912-9622-362c336254c4.png" width="200" height="300">
+<img src="https://user-images.githubusercontent.com/29107405/216125021-7b195391-25ca-44cb-b6b1-85efd7e13b7e.png" width="200" height="350"> 
+<img src="https://user-images.githubusercontent.com/29107405/216125818-2a74d8be-48bc-4c02-b35a-c6bf755dd6e4.png" width="200" height="300"> 
+<img src="https://user-images.githubusercontent.com/29107405/216126015-ef14d060-4d59-4912-9622-362c336254c4.png" width="200" height="300">
 
 
 Na slici Screenshot aplikacije 1 - Log in ekran ,prikazan je prvi ekran koji će korisnik videti kada se aplikacija pokrene. U app baru nalazi se tekst sa nazivom aplikacije. Ispod app bara se nalazi forma u kojoj je moguće da korisnik unese svoje podatke koji će se poslati bazi podataka i ako su podaci autentični otvoriće se početni ekran sa slike Screenshot aplikacije 2 - Početni ekran. Ako podaci nisu autentični pojaviće se poruka da podaci nisu ispravni.
@@ -28,9 +30,8 @@ Na slici Screenshot aplikacije 4 - Profil ekran, se nalazi ekran koji prikazuje 
 
 Ispod podatka o lokaciji korisnika nalazi se dugme za uređivanje podataka koje ima ikonicu olovka. Klikom na ovo dugme otvoriće se prozor sa svim trenutnim podacima koji mogu da se izmene. Ako je korisnik došao do ekrana Profil iz sadržaja Imenik dugme za editovanje neće biti prikazano, umesto njega biće prikazano dugme za slanje poruke koje vodi na ekran Poruka. Ispod tog dugmeta nalaze se sve ostale informacije o korisniku.
 
-![Screenshot aplikacije 4 – Profil ekran](https://user-images.githubusercontent.com/29107405/216127204-4c9ceedb-deed-446b-8713-021c0603a967.png)
+<img src="https://user-images.githubusercontent.com/29107405/216127204-4c9ceedb-deed-446b-8713-021c0603a967.png" width="200" height="300">
+<img src="https://user-images.githubusercontent.com/29107405/216127354-ed09cd8b-4115-433d-8ba0-9647ea41cb0b.png" width="200" height="300">
+<img src="https://user-images.githubusercontent.com/29107405/216127471-a20da82d-e639-4283-a5d1-e26627a68720.png" width="200" height="300">
 
-![Screenshot aplikacije 5 - Odmor ekran](https://user-images.githubusercontent.com/29107405/216127354-ed09cd8b-4115-433d-8ba0-9647ea41cb0b.png)
-
-![Screenshot aplikacije 6 - Radni sati ekran](https://user-images.githubusercontent.com/29107405/216127471-a20da82d-e639-4283-a5d1-e26627a68720.png)
 
