@@ -6,6 +6,7 @@ Flutter project.
 
 Naziv aplikacije je „Ofis“ i reč je o aplikaciji koja omogućava efikasnije upravljanje resursima i jednostavniju komunikaciju između korisnika. Cilj aplikacije je da omogući praćenje vremena provedenog radeći određenu aktivnost, lak kalendarski prikaz bitnih događaja korisnicima, olakšavanje procesa slanja zahteva za odmor, pregled radnih sati u određenom vremenskom intervalu, pregled bitnih dokumenata u samoj aplikaciji, pregled informacija o drugim korisnicima i komunikaciju sa njima i planiranje dnevnih aktivnosti pomoću rasporeda zadataka.
 
+<img src="https://user-images.githubusercontent.com/29107405/216125021-7b195391-25ca-44cb-b6b1-85efd7e13b7e.png" width="100" height="300">
 ![Screenshot aplikacije 1 - Log in ekran](https://user-images.githubusercontent.com/29107405/216125021-7b195391-25ca-44cb-b6b1-85efd7e13b7e.png | width=100 )
 ![Screenshot aplikacije 2 - Početni ekran](https://user-images.githubusercontent.com/29107405/216125818-2a74d8be-48bc-4c02-b35a-c6bf755dd6e4.png)
 ![Screenshot aplikacije 3 - Ekran obaveštenja](https://user-images.githubusercontent.com/29107405/216126015-ef14d060-4d59-4912-9622-362c336254c4.png)
