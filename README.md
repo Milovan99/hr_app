@@ -30,4 +30,42 @@ Ispod podatka o lokaciji korisnika nalazi se dugme za uređivanje podataka koje 
 
 <img src="https://user-images.githubusercontent.com/29107405/216127204-4c9ceedb-deed-446b-8713-021c0603a967.png" width="200" height="350">      <img src="https://user-images.githubusercontent.com/29107405/216127354-ed09cd8b-4115-433d-8ba0-9647ea41cb0b.png" width="200" height="350">      <img src="https://user-images.githubusercontent.com/29107405/216127471-a20da82d-e639-4283-a5d1-e26627a68720.png" width="200" height="350">
 
+Na slici Screenshot aplikacije 5 - Odmor ekran, se nalazi ekran koji prikazuje stanja zahteva i informacije o stanju. App bar se sastoji od dugmeta koji će odvesti korisnika nazad na prethodni ekran i teksta sa nazivom aplikacije. Ispod App bara nalazi se kartica koja prikazuje poslednji podneti zahtev. U kartici se nalazi opseg datuma za koje se zahtev podnosi, naslov sa opisom vrste zahteva i stanje zahteva.
+
+Ispod te kartice nalazi se druga kartica koja prikazuje broj neiskorištenih dana, iskorištenih dana, rezervisanih dana i ukupno dana godišnjeg odmora. Takođe u toj kartici nalazi se dugme za slanje zahteva i pri kliku na njega otvoriće se prozor u kome može da se unese opseg dana i opis zahteva.
+
+Na slici Screenshot aplikacije 6 – Radni sati ekran, se nalazi ekan koji prikazuje informacije o količini radnih sati. App bar se sastoji od dugmeta koji će odvesti korisnika nazad na prethodni ekran i teksta sa nazivom aplikacije.Ispod app bara nalazi se kartica koja pri klikom na nju omogućuva korisniku da izabere opseg dana za koje želi da pregleda aktivnosti.
+
+Ispod te kartice nalazi se kartica koja prikazuje zbir vremenskih aktivnost za selektovane dane.
+
+Ispod te kartice biće prikazana lista svih pojedinačnih aktivnosti. Ona sadži datum kada je aktivnost napravljena, naziv akrivnosti i koliko je ta aktivnost trajala.
+
+Na slici Screenshot aplikacije 7 - Kalendar ekran, se nalazi ekran koji prikazuje kalendar sa dešavanjima kreiranih od strane korisnika. App bar se sastoji od dugmeta koji će odvesti korisnika nazad na prethodni ekran, tekst sa nazivom aplikacije i dugmetom za dodavanje novih događaja. Kada je dugme za dodavanje novih događaja kliknuto otvoriće se novi prozor koji će omogućiti korisniku da unese novi događaj.
+
+Kada korisnik unese novi događaj on će biti dodat svim ostalim kalendarima drugih korisnika i svako će dobiti obaveštenje o novom događaju.
+
+<img src="https://user-images.githubusercontent.com/29107405/216129601-1f668c23-798a-414e-bb99-efe6bb4b3192.png" width="200" height="350"><img src="https://user-images.githubusercontent.com/29107405/216129651-32f59271-d841-4414-986a-f6675c7c0f69.png" width="200" height="350"><img src="https://user-images.githubusercontent.com/29107405/216129671-a66e9fdb-b8fa-4150-95b4-a8bb2c465f27.png" width="200" height="350">
+
+Ispod app bara se nalazi kalendar koji može biti prikazan na tri načina: prikaz čitavog meseca (svih dana u mesecu), prikaz dve sedmice i prikaz jedne sedmice. Pomoću strelica korisnik može da pređe na sledeći mesec ili da ode na prethodni. Na svakom danu će se nalaziti mali kružić koji označava da postoje događaji u tom danu. Prilikom klika na određeni dan pojaviće se plavi krug oko tog datuma i ispod kaledara biće prikazana lista svih događaja u tom danu. Svetlo plavom bojom će biti selektovan dan koji je u tom momentu kad je aplikacija pokrenuta.
+
+Da bi se dodao novi događaj mora se selektovati dan za koji korisnik želi da unese novi događaj. U slučaju da korisnik pokuša da unese novi događaj bez da selektuje dan, dobiće poruku u dnu ekrana da mora selektovati određeni dan. U slučaju da se neki događaj doda u međuvremenu od strane drugog korisnika, automatski će se kalendar ažurirati i moći će se taj događaj videti.
+
+Na slici Screenshot aplikacije 8 – Imenik, se nalazi sadržaj imenika na početnom ekranu. Podaci o korisnicima se isčitavaju i ispisuju u vidu liste. Svaki korisnik koji je u listi ima svoju sliku, ime i prezime, opis posla i grad. U Search baru korisnik može da traži korisnika preko bilo kojih od pređašnje napomenutih argumenata i lista podataka će se automatski ažurirati.
+
+Klikom na nekog od korisnika otvoriće se ekran Profil i ispisaće se svi podaci o korisniku koji je izabran. Funkcija imenika je posebno pogodna za nove članove tima koji koristi aplikaciju i nije još upoznat sa svima.
+
+Na slici Screenshot aplikacije 9 – Poruke, se nalazi sadržaj poruka koje je korisnik razmenio sa drugim korisnicima. Podaci o porukama se iščitavaju i ispisuje se ime i prezime korisnika, slika korisnika i poslednja poruka. U Search baru korisnik može da traži korisnika preko njegovog imena radi lakšeg pronalaska. Klikom na određenu poruku otvoriće se ekran Poruka na kojem će se ispisati sadržaj svih poruka između ta dva korisnika.
+
+<img src="https://user-images.githubusercontent.com/29107405/216129971-88855162-4612-4c29-8485-96aaf0e542e8.png" width="200" height="350"><img src="https://user-images.githubusercontent.com/29107405/216130008-57a4c247-42dd-44df-a0c0-87f32833391c.png" width="200" height="350">
+
+Na slici Screenshot aplikacije 10 – Aktivnosti, prikazan je sadržaj aktivnosti koji omogućava korisniku da isplanira svoj dan. Ispod app bara prikazana su tri dana sa početnim danom kada je aplikacija pokrenuta i zatim dva sledeća dana.
+
+Ispod dana prikazan je raspored aktivnosti. Aktivnosti se učitavaju iz baze podataka tako da je moguće da korisnik sam doda nove podatke ili da neko drugi isplanira dan za njega. Dodavanje novog događaja se vrši pomoću plavog dugmeta sa znakom plus iznad navigacionog menija koji se nalazi u dnu aplikacije. Klikom na to dugme otvara se prozor koji omogućava korisniku da unese potrebne podatke za kreiranje novog zadatka. Da bi kreirao novi zadatak korisnik mora da unese naziv zadatka, u koliko sati želi da zadatak bude izvršen, dan kada želi da zadatak bude obavljen i vremensko trajanje zadatka. Na osnovu tih podataka kreira se ljubičasti blok sa nazivom koji je korisnik odabrao, pozicioniran je u rasporedu tako da njegova visina odgovara vremenskom intervalu i veličina odgovara vremenskom trajanju.
+
+Na slici Screenshot aplikacije 11 – Poruka ekran, se nalazi ekran na kome su prikazane poruke između dva korisnika. App bar se sastoji od dugmeta koji će odvesti korisnika nazad na prethodni ekran, slike korisnika sa kojim se vodi kominikacija i njegovo ime i prezime. Ispod app bara biće prikazane sve poruke koje su korisnici razmenili. Na desnoj strani se nalaze poruke koje šalje korisnik koji je trenutno ulogovan i koji koristi aplikaciju, a na levoj stani se nalaze poruke korisnika sa kojim se vodi komunikacija. Ispod poruka nalazi se polje za unos nove poruke.
+
+
+
+
+
 
